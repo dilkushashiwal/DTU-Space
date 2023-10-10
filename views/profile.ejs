@@ -1,0 +1,49 @@
+<%- include('partials/header') %>
+
+<head>
+  <link rel="stylesheet" href="/blog.css">
+</head>
+
+<div>
+    <div class="container p-5">
+      <div class="row">
+
+        <% for(let i in profilepost){ %>
+        <div class="col-12 col-sm-8 col-md-6 col-lg-4">
+          <div class="card">
+            <img class="card-img" src="<%= profilepost[i].image %>"
+              alt="Bologna">
+            <div class="card">
+              <a href="/profile" class="btn btn-light btn-sm"><%= profilepost[i].type %></a>
+            </div>
+
+            <div class="card-body">
+              <h4 class="card-title"><%= profilepost[i].title %></h4>
+              <div class="card-footer text-muted d-flex justify-content-end bg-transparent border-top-0">
+                <div class="views "><%= profilepost[i].date%>
+                </div>
+              </div>
+              <% if(profilepost[i].content.length>25){%>
+                <%    str1=profilepost[i].content;%>
+                <%     str1=str1.substring(0,100);%>
+                  <p class="card-text"><%= str1 %> . . . </p>
+                <% } else{%>
+                  <%     str1=profilepost[i].content; %>
+                  <p class="card-text"><%= str1 %></p>
+                <% }%>
+                  <a href="/content/?id=<%= profilepost[i].id %>" class="btn btn-info">Read More</a>
+                  <p class="card-text"><small class="text-muted"><i class="fa fa-eye"></i> <%=profilepost[i].count %></small></p>
+            </div>
+
+          </div>
+        </div>
+        <% } %>
+      </div>
+
+    </div>
+  </div>
+
+  <%- include('partials/footer') %>
+  </body>
+
+  </html>

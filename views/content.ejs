@@ -1,0 +1,44 @@
+<%- include('partials/header') %>
+    <!-- onload for hashtags highlight -->
+    <div class=" border p-5" style="margin:50px 100px; border-radius:25px;">
+        <div class="row ">
+            <div class="col-8">
+                <h1><%= cont[0].title %></h1>
+                <p class="card-text"><small class="text-muted"><%= cont[0].date %></small></p>
+                <p><%= cont[0].content %></p>
+            </div>
+            <div class="col-4">
+                <img src="<%=cont[0].image %>" class="card-img" alt="Responsive image">
+                <% if(isLoggedIn) {%>
+                <form action="/content/?id=<%= cont[0]._id %>" method="POST">
+                    <div class="bg-light p-2">
+                        <div class="d-flex flex-row align-items-start">
+                            <a class="nav-link " id="usericon"><%=username[0] %></a>
+                            <textarea class="form-control ml-1 shadow-none textarea" name="comment_text"></textarea>
+                        </div>
+                        <div class="mt-2 text-right">
+                            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                            <button class="btn btn-primary btn-sm shadow-none" type="submit">Post comment</button>
+                        </div>
+                    </div>
+                </form>
+                <% } %>
+                <!-- comment -->
+                <% for(let i in comm){ %>
+                    <div class="row">
+                        <div class="col-2">
+                            <a class="nav-link " id="usericon"><%= comm[i][0].author.username[0] %></a>
+                        </div>
+                        <div class="col-10">
+                            <h5><%= comm[i][0].author.username %></h5>
+                            <p><%= comm[i][0].text %></p>
+                        </div>
+                    </div>
+                <% }%>
+            </div>
+        </div>
+        <div class="col-3">
+        </div>
+    </div>
+<%- include('partials/footer') %>
+    </body>
